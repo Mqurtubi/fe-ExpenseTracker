@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useLogin from "../hooks/useLogin";
 import AlertForm from "../components/AlertForm";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../context/useAuth";
 export default function LoginForm() {
   const {
     register,
@@ -25,10 +26,13 @@ export default function LoginForm() {
     },
   });
   const { message, isError, submit, clear } = useLogin();
+  const { refresh } = useAuth();
   const navigate = useNavigate();
+
   const onSubmit: SubmitHandler<LoginValues> = async (payload) => {
     try {
       await submit(payload);
+      refresh();
       reset();
       navigate("/");
     } catch (error) {
