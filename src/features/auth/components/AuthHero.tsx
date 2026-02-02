@@ -9,7 +9,7 @@ type AuthHero = {
 };
 export default function AuthHero({ title, subtitle, features }: AuthHero) {
   return (
-    <div className="bg-purple-200/30 p-15 grid col-span-2 gap-20 h-screen overflow-hidden">
+    <div className="bg-purple-200/30 p-15 grid col-span-2 gap-20 min-h-screen overflow-hidden">
       <div className="flex items-center gap-2">
         <RiWallet3Line className="bg-indigo-600 text-4xl p-2 rounded-2xl text-white" />
         <p className="text-2xl font-semibold">Expense Tracker</p>
