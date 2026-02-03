@@ -6,9 +6,12 @@ type ChartGridProps = {
   data: ResponseDashboard | null;
 };
 export default function ChartGrid({ data }: ChartGridProps) {
+  if(!data){
+    return <p>loading</p>
+  }
   return (
-    <div className="grid grid-cols-2">
-      {data === null ? (
+    <div className="grid grid-cols-2 gap-5">
+      {data?.expense_by_category.length === 0 ? (
         <p>belum ada transaksi</p>
       ) : (
         <>

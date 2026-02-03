@@ -31,8 +31,11 @@ export default function PieChartExpense({ data }: { data: CategoryStat[] }) {
   };
 
   return (
-    <div className="h-65 w-full col-span-1">
+    <div className=" border border-slate-300 pb-5">
+    <div className="h-85 w-full col-span-1 p-5  space-y-2">
+      <p className="text-lg">Distribusi Pengeluaran</p>
       <Pie data={chartData} options={options} />
+    </div>
     </div>
   );
 }
