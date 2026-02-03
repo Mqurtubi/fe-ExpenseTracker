@@ -1,6 +1,6 @@
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import type { RecentTransactionsValue } from "../types/type";
+import type { RecentTransactionsValue } from "../../types/type";
 type TransactionItemProps={
     transactions:RecentTransactionsValue
 }

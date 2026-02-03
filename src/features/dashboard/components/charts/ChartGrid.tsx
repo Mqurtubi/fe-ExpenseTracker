@@ -1,4 +1,4 @@
-import { ResponseDashboard } from "../types/type";
+import { ResponseDashboard } from "../../types/type";
 import BarChartExpense from "./BarChartExpense";
 import PieChartExpense from "./PieChartExpense";
 

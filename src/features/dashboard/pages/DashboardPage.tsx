@@ -1,8 +1,8 @@
 import PageHeader from "../../../components/ui/PageHeader";
-import StatsGrid from "../components/StatsGrid";
-import ChartGrid from "../components/ChartGrid";
+import StatsGrid from "../components/stats/StatsGrid";
+import ChartGrid from "../components/charts/ChartGrid";
 import useDashboard from "../hooks/useDashboard";
-import TransactionList from "../components/TransactionList";
+import TransactionList from "../components/transaction/TransactionList";
 
 export default function DashboardPage() {
   const { loading, responseDashboard } = useDashboard();

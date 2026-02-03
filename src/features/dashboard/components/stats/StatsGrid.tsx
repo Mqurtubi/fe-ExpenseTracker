@@ -2,7 +2,7 @@ import StatCard from "./StatCard";
 import { RiWallet3Line } from "react-icons/ri";
 import { BsGraphUpArrow, BsGraphDownArrow } from "react-icons/bs";
 import { LuClock3 } from "react-icons/lu";
-import { SummaryValue } from "../types/type";
+import { SummaryValue } from "../../types/type";
 
 type StatsGridProps = {
   data: SummaryValue;
