@@ -13,7 +13,7 @@ export default function DashboardLayout() {
         handleOpen={() => setOpenSidebar(!openSidebar)}
       />
       <div
-        className={`transition-all duration-300 ${openSidebar ? "ml-80" : "ml-28"} p-7`}
+        className={`transition-all duration-300 ${openSidebar ? "ml-80" : "ml-28"} px-7 pb-7 pt-20 `}
       >
         <Outlet />
       </div>
