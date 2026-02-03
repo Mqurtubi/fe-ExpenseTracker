@@ -3,6 +3,7 @@ import StatsGrid from "../components/stats/StatsGrid";
 import ChartGrid from "../components/charts/ChartGrid";
 import useDashboard from "../hooks/useDashboard";
 import TransactionList from "../components/transaction/TransactionList";
+import ContainerContent from "../../../components/ui/ContainerContent";
 
 export default function DashboardPage() {
   const { loading, responseDashboard } = useDashboard();
@@ -10,7 +11,7 @@ export default function DashboardPage() {
   const year = new Date().toLocaleString("id-ID", { year: "numeric" });
   if (loading) return <p>loading...</p>;
   return (
-    <div className="grid gap-7">
+    <ContainerContent>
       <PageHeader
         title="Dashboard"
         subtitle={`Ringkasan keuangan ${month} ${year}`}
@@ -23,6 +24,6 @@ export default function DashboardPage() {
 
       <ChartGrid data={responseDashboard} />
       <TransactionList data={responseDashboard}/>
-    </div>
+    </ContainerContent>
   );
 }
