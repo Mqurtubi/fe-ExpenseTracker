@@ -1,36 +1,26 @@
-import { useEffect } from "react";
 import PageHeader from "../../../components/ui/PageHeader";
 import StatsGrid from "../components/StatsGrid";
-import { getDashboard } from "../api/api";
 import ChartGrid from "../components/ChartGrid";
+import useDashboard from "../hooks/useDashboard";
 
 export default function DashboardPage() {
-  const month= new Date().toLocaleString('id-ID',{month:'long'})
-  const year = new Date().toLocaleString('id-ID',{year:"numeric"})
-  useEffect(() => {
-    const fetchData = async () => {
-      const date = new Date();
-      console.log(date.getMonth() + 1);
-      try {
-        const response = await getDashboard({
-          month: Number(date.getMonth() + 1),
-          year: Number(date.getFullYear()),
-        });
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+  const { loading, responseDashboard } = useDashboard();
+  const month = new Date().toLocaleString("id-ID", { month: "long" });
+  const year = new Date().toLocaleString("id-ID", { year: "numeric" });
+  if (loading) return <p>loading...</p>;
   return (
     <div className="grid gap-7">
       <PageHeader
         title="Dashboard"
         subtitle={`Ringkasan keuangan ${month} ${year}`}
       />
-      <StatsGrid />
-      <ChartGrid/>
+      {responseDashboard?.summary ? (
+        <StatsGrid data={responseDashboard.summary} />
+      ) : (
+        <p>Summary kosong</p>
+      )}
+
+      <ChartGrid data={responseDashboard} />
     </div>
   );
 }
