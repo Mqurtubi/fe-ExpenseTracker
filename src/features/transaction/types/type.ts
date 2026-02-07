@@ -7,11 +7,23 @@ interface TransactionsValue {
   type: Type;
 }
 
-interface TransactionQueryParams{
-  month:number,
-  year:number,
-  search?:string
+interface TransactionQueryParams {
+  month: number;
+  year: number;
+  type: Type;
+  category?: number;
+  search?: string;
+  sort_dir: Sort_dir;
+  sort_by: Sort_by;
 }
 
-type Type = "EXPENSE" | "INCOME" | "BOTH"
-export type {TransactionsValue,TransactionQueryParams}
+type Sort_dir = "asc" | "desc";
+type Sort_by = "transaction_date" | "amount";
+type Type = "EXPENSE" | "INCOME" | undefined;
+export type {
+  TransactionsValue,
+  TransactionQueryParams,
+  Type,
+  Sort_dir,
+  Sort_by,
+};
