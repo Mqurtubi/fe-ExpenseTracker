@@ -27,4 +27,10 @@ interface SummaryValue {
 }
 
 type Type = "INCOME" | "EXPENSE" | "BOTH";
-export type { ExpenseCategoryValue, ResponseDashboard, SummaryValue, RecentTransactionsValue };
+export type {
+  ExpenseCategoryValue,
+  ResponseDashboard,
+  SummaryValue,
+  RecentTransactionsValue,
+  Type,
+};
