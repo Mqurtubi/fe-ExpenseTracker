@@ -5,7 +5,7 @@ import DropdownFilter, { DropdownOptions } from "./DropdownFilter";
 import MonthNavigation from "./MonthNavigation";
 import SearchBar from "./SearchBar";
 import TransactionFilters from "./TransactionFilters";
-import { Sort } from "../hooks/useTransactionFilter";
+import { Sort } from "../../hooks/useTransactionFilter";
 type ContainerFilter = {
   search: string;
   setSearch: (v: string) => void;

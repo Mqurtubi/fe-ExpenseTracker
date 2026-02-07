@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { TransactionQueryParams, TransactionsValue } from "../../types/type";
-import { getTransactions } from "../../api/api";
+import { TransactionQueryParams, TransactionsValue } from "../types/type";
+import { getTransactions } from "../api/api";
 
 export default function useTransactionQuery(params: TransactionQueryParams) {
   const [transactions, setTransactions] = useState<TransactionsValue[]>([]);

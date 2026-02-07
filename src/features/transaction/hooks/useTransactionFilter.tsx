@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useDebounce from "../../../../hooks/useDebounce";
+import useDebounce from "../../../hooks/useDebounce";
 
 export type Sort = "terbaru" | "terlama" | "terbesar" | "terkecil";
 export default function useTransactionFilter() {

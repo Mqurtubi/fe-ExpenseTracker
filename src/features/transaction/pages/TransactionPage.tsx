@@ -3,7 +3,7 @@ import ContainerContent from "../../../components/ui/ContainerContent";
 import PageHeader from "../../../components/ui/PageHeader";
 import ContainerFilter from "../components/filter/ContainerFilter";
 import TransactionTable from "../components/table/TransactionTable";
-import useTransactions from "../components/hooks/useTransactions";
+import useTransactions from "../hooks/useTransactions";
 
 export default function TransactionPage() {
   const {

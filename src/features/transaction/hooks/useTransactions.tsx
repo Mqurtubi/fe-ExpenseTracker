@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import useTransactionFilter from "./useTransactionFilter";
 import useTransactionQuery from "./useTransactionQuery";
-import { Sort_by, Sort_dir } from "../../types/type";
+import { Sort_by, Sort_dir } from "../types/type";
 
 export default function useTransactions() {
   const filter = useTransactionFilter();
