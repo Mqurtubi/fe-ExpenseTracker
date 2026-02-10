@@ -6,6 +6,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import PublicOnlyRoute from "./PublicOnlyRoute";
 import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import TransactionPage from "../../features/transaction/pages/TransactionPage";
+import { TransactionProvider } from "../../features/transaction/context/TransactionProvider";
 
 export default function AppRouter() {
   return (
@@ -31,12 +32,14 @@ export default function AppRouter() {
         path="/"
         element={
           <ProtectedRoute>
-            <DashboardLayout />
+            <TransactionProvider>
+              <DashboardLayout />
+            </TransactionProvider>
           </ProtectedRoute>
         }
       >
         <Route index element={<DashboardPage />} />
-        <Route path="/transaction" element={<TransactionPage/>}/>
+        <Route path="/transaction" element={<TransactionPage />} />
       </Route>
     </Routes>
   );
