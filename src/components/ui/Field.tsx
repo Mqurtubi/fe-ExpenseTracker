@@ -16,7 +16,7 @@ export default function Field({
         {label} {required && "*"}
       </label>
       {children}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 }

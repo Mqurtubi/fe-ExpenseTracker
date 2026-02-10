@@ -1,13 +1,15 @@
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Modal from "../../../../components/ui/Modal";
 import AmountCurrencyInput from "../fields/AmountCurrencyInput";
 import TransactionTypeToogle from "../fields/TransactionTypeToogle";
-import { TransactionFormValues } from "../../types/type";
 import Field from "../../../../components/ui/Field";
 import CategorySelect from "../fields/CategorySelect";
 import useCategory from "../../../category/hooks/useCategory";
 import { DropdownOptions } from "../filter/DropdownFilter";
 import { useMemo } from "react";
+import { addTransactionSchema, TransactionFormData } from "../../types/transaction.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useAddTransaction from "../../hooks/useAddTransaction";
 
 type AddTransactionModalProps = {
   open: boolean;
@@ -18,12 +20,14 @@ export default function AddTransactionModal({
   onClose,
 }: AddTransactionModalProps) {
   const { category } = useCategory();
-  const { control, register, watch, handleSubmit, reset } =
-    useForm<TransactionFormValues>({
+  const {submit} = useAddTransaction()
+  const { control, register, watch, handleSubmit,reset, formState:{errors} } =
+    useForm<TransactionFormData>({
+      resolver:zodResolver(addTransactionSchema),
       defaultValues: {
         type: "EXPENSE",
         amount: 0,
-        date: new Date().toISOString().slice(0, 10),
+        transaction_date: new Date().toISOString().slice(0, 10),
         category_id: undefined,
         payment_method: undefined,
         note: "",
@@ -47,13 +51,26 @@ export default function AddTransactionModal({
     { value: "EWALLET", label: "E-Wallet" },
     { value: "OTHER", label: "Lainnya" },
   ];
+
+  const onSubmit:SubmitHandler<TransactionFormData> = async (data)=>{
+    console.log(data)
+    try {
+      await submit(data)
+      reset()
+      onClose()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Modal open={open} onClose={onClose} title="Tambah Transaksi">
-      <form className="grid gap-3">
-        <Field label="Tipe Transaksi" required={false}>
+      <form className="grid gap-3" id="add-transaction-form" onSubmit={handleSubmit(onSubmit)}>
+        <Field label="Tipe Transaksi" required={false} error={errors.type?.message}>
           <Controller
             control={control}
             name="type"
+            
             render={({ field }) => (
               <TransactionTypeToogle
                 value={field.value}
@@ -62,7 +79,7 @@ export default function AddTransactionModal({
             )}
           />
         </Field>
-        <Field label="Jumlah" required={true}>
+        <Field label="Jumlah" required={true} error={errors.amount?.message}>
           <Controller
             control={control}
             name="amount"
@@ -74,14 +91,14 @@ export default function AddTransactionModal({
             )}
           />
         </Field>
-        <Field label="Tanggal" required={true}>
+        <Field label="Tanggal" required={true} error={errors.transaction_date?.message}>
           <input
             type="date"
             className="w-full bg-slate-400/20 p-2 rounded-lg"
-            {...register("date")}
+            {...register("transaction_date")}
           />
         </Field>
-        <Field label="Kategori" required={true}>
+        <Field label="Kategori" required={true} error={errors.category_id?.message}>
           <Controller
             control={control}
             name="category_id"
@@ -108,6 +125,9 @@ export default function AddTransactionModal({
               />
             )}
           />
+        </Field>
+        <Field label="Catatan" required={true} error={errors.note?.message}>
+            <textarea className="bg-slate-400/20 rounded-lg min-h-20 p-2" placeholder="contoh: makan siang" {...register("note")}/>
         </Field>
       </form>
     </Modal>

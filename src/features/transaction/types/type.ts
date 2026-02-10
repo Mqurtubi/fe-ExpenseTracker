@@ -7,6 +7,7 @@ interface TransactionsValue {
   type: Type;
 }
 
+
 interface TransactionQueryParams {
   month: number;
   year: number;
@@ -20,7 +21,7 @@ interface TransactionQueryParams {
 interface TransactionFormValues{
   type: "EXPENSE" | "INCOME",
   amount:number,
-  date:string,
+  transaction_date:string,
   category_id?:number,
   payment_method?:PaymentMethod,
   note?:string
@@ -29,7 +30,7 @@ interface TransactionFormValues{
 type Sort_dir = "asc" | "desc";
 type Sort_by = "transaction_date" | "amount";
 type Type = "EXPENSE" | "INCOME" | undefined;
-type PaymentMethod = "Tunai" | "Transfer Bank" | "Kartu Debit" | "Kartu Kredit" | "E-Wallet" | "Lainnya"
+type PaymentMethod = "CASH" | "BANK_TRANSFER" | "DEBIT_CARD" | "CREDIT_CARD" | "EWALLET" | "OTHER"
 export type {
   TransactionsValue,
   TransactionQueryParams,

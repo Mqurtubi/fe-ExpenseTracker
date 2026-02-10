@@ -47,7 +47,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
       className={` absolute w-full bg-slate-500/50 top-0 left-0 h-full flex flex-col items-center justify-center`}
     >
       <div
-        className="bg-white min-w-md py-5 px-7 rounded-xl space-y-2"
+        className="bg-white min-w-md py-5 px-7 rounded-xl space-y-5 relative overflow-y-scroll"
         ref={modalRef}
       >
         <div className="flex justify-between">
@@ -70,7 +70,8 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
             Batal
           </button>
           <button
-            type="button"
+            type="submit"
+            form="add-transaction-form"
             className="px-5 py-2 rounded-xl font-semibold text-sm bg-indigo-600/80 hover:bg-indigo-600  text-white"
           >
             Simpan

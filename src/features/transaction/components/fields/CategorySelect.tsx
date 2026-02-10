@@ -39,7 +39,7 @@ export default function CategorySelect<T>({
   return (
     <div className="w-full relative" ref={refDropdown}>
       <button
-        className="bg-slate-400/20  w-full px-3 py-2 rounded-lg flex items-center justify-between"
+        className={`bg-slate-400/20  w-full px-3 py-2 rounded-lg flex items-center justify-between text-slate-500 ${value && "text-slate-900"}` }
         type="button"
         onClick={() => setDropdown(!dropdown)}
       >
