@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { TransactionFormValues } from "../types/type";
-import { addTransactions } from "../api/api";
 import { ApiErrorResponse } from "../../auth/types/auth.type";
+import { TransactionFormValues } from "../types/type";
+import { updateTransaction } from "../api/api";
 
 function isApiErrorResponse(x: unknown): x is ApiErrorResponse {
   if (typeof x !== "object" || x === null) return false;
@@ -9,21 +9,21 @@ function isApiErrorResponse(x: unknown): x is ApiErrorResponse {
   return obj.status === "error" && typeof obj.message === "string";
 }
 
-export default function useAddTransaction() {
+export default function useUpdateTransaction() {
   const [message, setMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const submit = async (params: TransactionFormValues) => {
+  const submit = async (id: number, params: TransactionFormValues) => {
     setLoading(true);
     setMessage(null);
     try {
-      const data = await addTransactions(params);
+      const data = await updateTransaction(id, params);
       return data;
     } catch (error) {
       if (isApiErrorResponse(error)) {
         setMessage(error?.message);
       } else {
-        setMessage("Add gagal");
+        setMessage("Update gagal");
       }
     }
   };

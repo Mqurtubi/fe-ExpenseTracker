@@ -26,15 +26,47 @@ const getTransactions = async (params: TransactionQueryParams) => {
   }
 };
 
-const addTransactions = async (params:TransactionFormValues)=>{
+const addTransactions = async (params: TransactionFormValues) => {
   try {
-    const responseTransaction = await http.post("/transaction",params)
-    return responseTransaction.data
-  }  catch (err: unknown) {
+    const responseTransaction = await http.post("/transaction", params);
+    return responseTransaction.data;
+  } catch (err: unknown) {
     if (axios.isAxiosError<ApiErrorResponse>(err)) {
       throw err?.response?.data ?? { status: "error", message: err.message };
     }
     throw { status: "error", message: "Unknown error" } as ApiErrorResponse;
   }
-}
-export { getTransactions, addTransactions };
+};
+
+const updateTransaction = async (
+  id: number,
+  payload: TransactionFormValues,
+) => {
+  try {
+    const responseTransaction = await http.put(`/transaction/${id}`, payload);
+    return responseTransaction.data;
+  } catch (err: unknown) {
+    if (axios.isAxiosError<ApiErrorResponse>(err)) {
+      throw err?.response?.data ?? { status: "error", message: err.message };
+    }
+    throw { status: "error", message: "Unknown error" } as ApiErrorResponse;
+  }
+};
+
+const deleteTransaction = async (id: number) => {
+  try {
+    const responseTransaction = await http.delete(`/transaction/${id}`);
+    return responseTransaction.data;
+  } catch (err: unknown) {
+    if (axios.isAxiosError<ApiErrorResponse>(err)) {
+      throw err?.response?.data ?? { status: "error", message: err.message };
+    }
+    throw { status: "error", message: "Unknown error" } as ApiErrorResponse;
+  }
+};
+export {
+  getTransactions,
+  addTransactions,
+  updateTransaction,
+  deleteTransaction,
+};

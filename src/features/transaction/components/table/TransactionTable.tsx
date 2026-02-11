@@ -4,9 +4,11 @@ import TransactionTableItem from "./TransactionTableItem";
 
 type TransactionTableProps = {
   transactions: TransactionsValue[];
+  handleDelete: (v: number) => void;
 };
 export default function TransactionTable({
   transactions,
+  handleDelete,
 }: TransactionTableProps) {
   if (!transactions) {
     return <p>loading</p>;
@@ -19,7 +21,11 @@ export default function TransactionTable({
       <table className="table-auto min-w-full ">
         <TransactionTableHeader />
         {transactions.map((transaction, index) => (
-          <TransactionTableItem data={transaction} key={index} />
+          <TransactionTableItem
+            data={transaction}
+            key={index}
+            handleDelete={handleDelete}
+          />
         ))}
       </table>
     </div>

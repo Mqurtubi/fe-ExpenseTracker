@@ -4,6 +4,7 @@ import PageHeader from "../../../components/ui/PageHeader";
 import ContainerFilter from "../components/filter/ContainerFilter";
 import TransactionTable from "../components/table/TransactionTable";
 import useTransactions from "../hooks/useTransactions";
+import useTransactionRefetch from "../context/useTransactionRefetch";
 
 export default function TransactionPage() {
   const {
@@ -21,10 +22,14 @@ export default function TransactionPage() {
     setCategoryId,
     sort,
     setSort,
+    handleDelete,
   } = useTransactions();
+  const { setRefetch } = useTransactionRefetch();
+
   useEffect(() => {
-    refetchTransactions();
-  }, [refetchTransactions]);
+    setRefetch(() => refetchTransactions);
+    return () => setRefetch(null);
+  }, [refetchTransactions, setRefetch]);
   return (
     <ContainerContent>
       <PageHeader
@@ -45,7 +50,10 @@ export default function TransactionPage() {
         sort={sort}
         setSort={setSort}
       />
-      <TransactionTable transactions={transactions} />
+      <TransactionTable
+        transactions={transactions}
+        handleDelete={handleDelete}
+      />
     </ContainerContent>
   );
 }

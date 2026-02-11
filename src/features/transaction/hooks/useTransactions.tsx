@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import useTransactionFilter from "./useTransactionFilter";
 import useTransactionQuery from "./useTransactionQuery";
 import { Sort_by, Sort_dir } from "../types/type";
+import { deleteTransaction } from "../api/api";
 
 export default function useTransactions() {
   const filter = useTransactionFilter();
@@ -44,10 +45,15 @@ export default function useTransactions() {
 
   const query = useTransactionQuery(queryParams);
 
+  const handleDelete = async (id: number) => {
+    await deleteTransaction(id);
+    query.refetch();
+  };
   return {
     transactions: query.transactions,
     loading: query.loading,
     refetchTransactions: query.refetch,
     ...filter,
+    handleDelete,
   };
 }
