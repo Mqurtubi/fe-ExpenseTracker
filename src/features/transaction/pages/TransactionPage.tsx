@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ContainerContent from "../../../components/ui/ContainerContent";
 import PageHeader from "../../../components/ui/PageHeader";
 import ContainerFilter from "../components/filter/ContainerFilter";
 import TransactionTable from "../components/table/TransactionTable";
 import useTransactions from "../hooks/useTransactions";
 import useTransactionRefetch from "../context/useTransactionRefetch";
+import AddTransactionModal from "../components/modals/AddTransactionModal";
+import { TransactionsValue } from "../types/type";
 
 export default function TransactionPage() {
   const {
@@ -24,7 +26,15 @@ export default function TransactionPage() {
     setSort,
     handleDelete,
   } = useTransactions();
-  const { setRefetch } = useTransactionRefetch();
+  const { setRefetch, refetch } = useTransactionRefetch();
+  const [openEditModal,setOpenEditModal] = useState(false)
+  const [selectedTransaction,setSelectedTransaction]=useState<TransactionsValue>()
+
+  const handleUpdate = (transaction:TransactionsValue)=>{
+    setSelectedTransaction(transaction)
+    console.log(transaction)
+    setOpenEditModal(true)
+  }
 
   useEffect(() => {
     setRefetch(() => refetchTransactions);
@@ -53,7 +63,9 @@ export default function TransactionPage() {
       <TransactionTable
         transactions={transactions}
         handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
       />
+      <AddTransactionModal mode="edit" open={openEditModal} onClose={()=>setOpenEditModal(false)} onSuccess={refetch ?? undefined} initial={selectedTransaction}/>
     </ContainerContent>
   );
 }

@@ -5,10 +5,12 @@ import TransactionTableItem from "./TransactionTableItem";
 type TransactionTableProps = {
   transactions: TransactionsValue[];
   handleDelete: (v: number) => void;
+  handleUpdate:(v:TransactionsValue)=>void
 };
 export default function TransactionTable({
   transactions,
   handleDelete,
+  handleUpdate
 }: TransactionTableProps) {
   if (!transactions) {
     return <p>loading</p>;
@@ -25,6 +27,7 @@ export default function TransactionTable({
             data={transaction}
             key={index}
             handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
           />
         ))}
       </table>

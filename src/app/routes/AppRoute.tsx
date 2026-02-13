@@ -7,6 +7,7 @@ import PublicOnlyRoute from "./PublicOnlyRoute";
 import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import TransactionPage from "../../features/transaction/pages/TransactionPage";
 import { TransactionProvider } from "../../features/transaction/context/TransactionProvider";
+import { ToastProvider } from "../../features/transaction/context/ToastProvider";
 
 export default function AppRouter() {
   return (
@@ -33,7 +34,9 @@ export default function AppRouter() {
         element={
           <ProtectedRoute>
             <TransactionProvider>
-              <DashboardLayout />
+              <ToastProvider>
+                <DashboardLayout />
+              </ToastProvider>
             </TransactionProvider>
           </ProtectedRoute>
         }

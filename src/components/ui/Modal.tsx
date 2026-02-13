@@ -43,9 +43,9 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
   }, [onClose, open]);
   if (!open) return null;
   return (
-    <div className={` absolute w-full bg-slate-500/50 top-0 left-0 h-full `}>
+    <div className={` fixed w-full bg-slate-500/50 top-0 left-0 h-screen grid justify-center`}>
       <div
-        className="bg-white min-w-md py-5 px-7 rounded-xl space-y-5 relative w-1/4 m-auto top-32"
+        className="bg-white min-w-md py-5 px-7 rounded-xl space-y-5 relative w-1/4 m-auto  "
         ref={modalRef}
       >
         <div className="flex justify-between">

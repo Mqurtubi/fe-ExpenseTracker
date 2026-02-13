@@ -14,15 +14,16 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAddTransaction from "../../hooks/useAddTransaction";
 import useUpdateTransaction from "../../hooks/useUpdateTransaction";
+import { TransactionsValue } from "../../types/type";
+import { useToast } from "../../context/useToast";
 
 type Mode = "create" | "edit";
-type TransactionFormEdit = TransactionFormData & { id: number };
 type AddTransactionModalProps = {
   open: boolean;
   onClose: () => void;
   onSuccess?: () => void | Promise<void>;
   mode: Mode;
-  initial?: TransactionFormEdit;
+  initial?: TransactionsValue;
 };
 export default function AddTransactionModal({
   open,
@@ -31,6 +32,7 @@ export default function AddTransactionModal({
   mode,
   initial,
 }: AddTransactionModalProps) {
+  const {toast}=useToast()
   const { category } = useCategory();
   const { submit: add } = useAddTransaction();
   const { submit: update } = useUpdateTransaction();
@@ -74,12 +76,13 @@ export default function AddTransactionModal({
   ];
 
   const onSubmit: SubmitHandler<TransactionFormData> = async (data) => {
-    console.log(data);
     try {
       if (mode === "edit" && initial) {
-        await update(initial.id, data);
+        await update(Number(initial.id), data);
+        toast.success("Edit transaction berhasil")
       } else {
         await add(data);
+        toast.success("Tambah transaction berhasil")
       }
       reset();
       onClose();
@@ -105,9 +108,9 @@ export default function AddTransactionModal({
       reset({
         type: initial.type,
         amount: Number(initial.amount),
-        transaction_date: initial.transaction_date.slice(0, 10),
+        transaction_date: initial.transaction_date.slice(0,10),
         category_id:
-          initial.category_id != null ? Number(initial.category_id) : undefined,
+          initial.category.id != null ? Number(initial.category.id) : undefined,
         payment_method: initial.payment_method ?? undefined,
         note: initial.note ?? "",
       });
@@ -129,7 +132,7 @@ export default function AddTransactionModal({
       title={mode === "edit" ? "Edit Transaksi" : "Tambah Transaksi"}
     >
       <form
-        className="grid gap-3 relative overflow-auto"
+        className="grid gap-3 relative overflow-auto max-h-80 "
         id="add-transaction-form"
         onSubmit={handleSubmit(onSubmit)}
       >

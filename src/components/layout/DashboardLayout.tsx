@@ -5,6 +5,7 @@ import { useState } from "react";
 import AddTransactionModal from "../../features/transaction/components/modals/AddTransactionModal";
 import useModal from "../../hooks/useModal";
 import useTransactionRefetch from "../../features/transaction/context/useTransactionRefetch";
+import Toast from "../ui/toast/Toast";
 
 export default function DashboardLayout() {
   const [openSidebar, setOpenSidebar] = useState(true);
@@ -26,7 +27,9 @@ export default function DashboardLayout() {
         open={openModal}
         onClose={close}
         onSuccess={refetch ?? undefined}
+        mode="create"
       />
+      <Toast/>
     </div>
   );
 }

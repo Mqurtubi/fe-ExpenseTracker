@@ -1,7 +1,8 @@
 interface TransactionsValue {
   amount: number;
   category: { id: string; name: string };
-  date: string;
+  transaction_date: string;
+  payment_method?:PaymentMethod,
   id: string;
   note: string;
   type: Type;
