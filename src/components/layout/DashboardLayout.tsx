@@ -29,7 +29,7 @@ export default function DashboardLayout() {
         onSuccess={refetch ?? undefined}
         mode="create"
       />
-      <Toast/>
+      <Toast />
     </div>
   );
 }

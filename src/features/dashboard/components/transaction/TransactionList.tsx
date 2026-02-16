@@ -1,10 +1,11 @@
-import { RecentTransactionsValue, ResponseDashboard } from "../../types/type";
+import { TransactionsValue } from "../../../transaction/types/type";
+import { ResponseDashboard } from "../../types/type";
 import TransactionItem from "./TransactionItem";
 
 type TransactionListProps = {
   data: ResponseDashboard | null;
   handleDelete: (id: number) => void;
-  handleUpdate: (v: RecentTransactionsValue) => void;
+  handleUpdate: (v: TransactionsValue) => void;
 };
 export default function TransactionList({
   data,

@@ -1,17 +1,17 @@
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import type { RecentTransactionsValue } from "../../types/type";
+import { TransactionsValue } from "../../../transaction/types/type";
 type TransactionItemProps = {
-  transactions: RecentTransactionsValue;
+  transactions: TransactionsValue;
   handleDelete: (v: number) => void;
-  handleUpdate: (v: RecentTransactionsValue) => void;
+  handleUpdate: (v: TransactionsValue) => void;
 };
 export default function TransactionItem({
   transactions,
   handleDelete,
   handleUpdate,
 }: TransactionItemProps) {
-  const date = new Date(transactions.date);
+  const date = new Date(transactions.transaction_date);
   return (
     <div className="p-5 border border-slate-300 flex justify-between items-center rounded-lg">
       <div className="space-y-2">

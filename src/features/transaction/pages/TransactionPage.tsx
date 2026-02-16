@@ -7,6 +7,8 @@ import useTransactions from "../hooks/useTransactions";
 import useTransactionRefetch from "../context/useTransactionRefetch";
 import AddTransactionModal from "../components/modals/AddTransactionModal";
 import { TransactionsValue } from "../types/type";
+import ConfirmDialog from "../../../components/ui/dialog/ConfirmDialog";
+import { useToast } from "../context/useToast";
 
 export default function TransactionPage() {
   const {
@@ -27,15 +29,31 @@ export default function TransactionPage() {
     handleDelete,
   } = useTransactions();
   const { setRefetch, refetch } = useTransactionRefetch();
-  const [openEditModal,setOpenEditModal] = useState(false)
-  const [selectedTransaction,setSelectedTransaction]=useState<TransactionsValue>()
+  const { toast } = useToast();
+  const [openEditModal, setOpenEditModal] = useState(false);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedTransaction, setSelectedTransaction] =
+    useState<TransactionsValue>();
 
-  const handleUpdate = (transaction:TransactionsValue)=>{
-    setSelectedTransaction(transaction)
-    console.log(transaction)
-    setOpenEditModal(true)
-  }
+  const handleUpdate = (transaction: TransactionsValue) => {
+    setSelectedTransaction(transaction);
+    setOpenEditModal(true);
+  };
 
+  const askDelete = (id: number) => {
+    setSelectedId(id);
+    setOpenConfirm(true);
+  };
+  const confirmDelete = async () => {
+    if (!selectedId) return;
+    await handleDelete(selectedId);
+
+    toast.success("Transaction berhasil dihapus");
+    setOpenConfirm(false);
+    setSelectedId(null);
+    refetchTransactions();
+  };
   useEffect(() => {
     setRefetch(() => refetchTransactions);
     return () => setRefetch(null);
@@ -62,10 +80,23 @@ export default function TransactionPage() {
       />
       <TransactionTable
         transactions={transactions}
-        handleDelete={handleDelete}
+        handleDelete={askDelete}
         handleUpdate={handleUpdate}
       />
-      <AddTransactionModal mode="edit" open={openEditModal} onClose={()=>setOpenEditModal(false)} onSuccess={refetch ?? undefined} initial={selectedTransaction}/>
+      <AddTransactionModal
+        mode="edit"
+        open={openEditModal}
+        onClose={() => setOpenEditModal(false)}
+        onSuccess={refetch ?? undefined}
+        initial={selectedTransaction}
+      />
+      <ConfirmDialog
+        openConfirm={openConfirm}
+        title="Hapus transaction ini"
+        subTitle="tindakan tidak dapat dibatalkan"
+        onClose={() => setOpenConfirm(false)}
+        onConfirm={confirmDelete}
+      />
     </ContainerContent>
   );
 }

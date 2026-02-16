@@ -1,3 +1,5 @@
+import { TransactionsValue } from "../../transaction/types/type";
+
 interface ExpenseCategoryValue {
   amount: number;
   category_color: string;
@@ -7,14 +9,14 @@ interface ExpenseCategoryValue {
 interface ResponseDashboard {
   budget: { used_percetage: number };
   expense_by_category: ExpenseCategoryValue[];
-  recent_transactions: RecentTransactionsValue[];
+  recent_transactions: TransactionsValue[];
   summary: SummaryValue;
 }
 
 interface RecentTransactionsValue {
   amount: number;
   category: { id: string; name: string };
-  date: string;
+  transaction_date: string;
   id: string;
   note: string;
   type: Type;

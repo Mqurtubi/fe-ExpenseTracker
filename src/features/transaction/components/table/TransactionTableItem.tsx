@@ -1,19 +1,17 @@
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import {  TransactionsValue } from "../../types/type";
-import { useToast } from "../../context/useToast";
+import { TransactionsValue } from "../../types/type";
 
 type TransactionTableItemProps = {
   data: TransactionsValue;
   handleDelete: (v: number) => void;
-  handleUpdate:(v:TransactionsValue) => void
+  handleUpdate: (v: TransactionsValue) => void;
 };
 export default function TransactionTableItem({
   data,
   handleDelete,
-  handleUpdate
+  handleUpdate,
 }: TransactionTableItemProps) {
-  const {toast}=useToast()
   const date = new Date(data.transaction_date);
   const amount = Number(data.amount);
   return (
@@ -44,15 +42,15 @@ export default function TransactionTableItem({
         <button
           type="button"
           className="hover:cursor-pointer hover:bg-slate-400/20 p-3"
-          onClick={()=>handleUpdate(data)}
+          onClick={() => handleUpdate(data)}
         >
           <BiEdit />
         </button>
         <button
           type="button"
           className="text-red-800 hover:cursor-pointer hover:bg-slate-400/20 p-3"
-          onClick={() => {handleDelete(Number(data.id)) 
-            toast.success("Transaction berhasil dihapus")
+          onClick={() => {
+            handleDelete(Number(data.id));
           }}
         >
           <RiDeleteBin6Line />
