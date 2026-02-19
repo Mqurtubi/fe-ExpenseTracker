@@ -8,6 +8,7 @@ import DashboardPage from "../../features/dashboard/pages/DashboardPage";
 import TransactionPage from "../../features/transaction/pages/TransactionPage";
 import { TransactionProvider } from "../../features/transaction/context/TransactionProvider";
 import { ToastProvider } from "../../features/transaction/context/ToastProvider";
+import BudgetPage from "../../features/budget/pages/BudgetPage";
 
 export default function AppRouter() {
   return (
@@ -43,6 +44,7 @@ export default function AppRouter() {
       >
         <Route index element={<DashboardPage />} />
         <Route path="/transaction" element={<TransactionPage />} />
+        <Route path="/budget" element={<BudgetPage />} />
       </Route>
     </Routes>
   );

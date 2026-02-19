@@ -36,8 +36,8 @@ export default function DashboardPage() {
     refetchRecentTransaction();
   };
   useEffect(() => {
-    console.log(responseDashboard);
-  }, [responseDashboard]);
+    refetchRecentTransaction();
+  }, [refetchRecentTransaction]);
   if (loading) return <p>loading...</p>;
 
   return (

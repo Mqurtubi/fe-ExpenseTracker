@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import useCategory from "../../../category/hooks/useCategory";
 import { Type } from "../../types/type";
 import DropdownFilter, { DropdownOptions } from "./DropdownFilter";
-import MonthNavigation from "./MonthNavigation";
+import MonthNavigation from "../../../../components/ui/date/MonthNavigation";
 import SearchBar from "./SearchBar";
 import TransactionFilters from "./TransactionFilters";
 import { Sort } from "../../hooks/useTransactionFilter";
