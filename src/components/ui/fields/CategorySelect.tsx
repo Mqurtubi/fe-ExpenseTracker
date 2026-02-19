@@ -1,6 +1,6 @@
 import { FaCheck } from "react-icons/fa6";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { DropdownOptions } from "../filter/DropdownFilter";
+import { DropdownOptions } from "../../../features/transaction/components/filter/DropdownFilter";
 import { useEffect, useMemo, useRef, useState } from "react";
 type CategorySelectProps<T> = {
   value?: T;

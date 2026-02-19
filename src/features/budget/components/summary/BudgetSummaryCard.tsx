@@ -7,14 +7,16 @@ import BudgetSummaryStats from "./BudgetSummaryStats";
 
 export default function BudgetSummaryCard({
   budget,
+  addModal
 }: {
   budget: SummaryBudget | undefined;
+  addModal:()=>void
 }) {
   if (!budget) return;
   return (
     <div className="grid grid-cols-1">
       <CardBudget>
-        <BudgetSummaryHeader />
+        <BudgetSummaryHeader addModal={addModal}/>
         <ProgressBar progress={budget.progress} />
         <BudgetSummaryStats
           used={budget.totalUsed}

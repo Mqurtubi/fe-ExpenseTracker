@@ -25,6 +25,8 @@ export default function useAddTransaction() {
       } else {
         setMessage("Add gagal");
       }
+    }finally{
+      setLoading(false)
     }
   };
 

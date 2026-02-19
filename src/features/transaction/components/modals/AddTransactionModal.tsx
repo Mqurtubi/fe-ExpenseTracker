@@ -1,9 +1,9 @@
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import Modal from "../../../../components/ui/Modal";
-import AmountCurrencyInput from "../fields/AmountCurrencyInput";
+import AmountCurrencyInput from "../../../../components/ui/fields/AmountCurrencyInput";
 import TransactionTypeToogle from "../fields/TransactionTypeToogle";
-import Field from "../../../../components/ui/Field";
-import CategorySelect from "../fields/CategorySelect";
+import Field from "../../../../components/ui/fields/Field";
+import CategorySelect from "../../../../components/ui/fields/CategorySelect";
 import useCategory from "../../../category/hooks/useCategory";
 import { DropdownOptions } from "../filter/DropdownFilter";
 import { useEffect, useMemo, useRef } from "react";
@@ -130,6 +130,7 @@ export default function AddTransactionModal({
       open={open}
       onClose={onClose}
       title={mode === "edit" ? "Edit Transaksi" : "Tambah Transaksi"}
+      idForm="add-transaction-form"
     >
       <form
         className="grid gap-3 relative overflow-auto max-h-80 "

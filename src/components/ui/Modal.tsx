@@ -5,8 +5,9 @@ type ModalProps = {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
+  idForm:string
 };
-export default function Modal({ open, onClose, title, children }: ModalProps) {
+export default function Modal({ open, onClose, title, children,idForm }: ModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (!open) return;
@@ -69,7 +70,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
           </button>
           <button
             type="submit"
-            form="add-transaction-form"
+            form={idForm}
             className="px-5 py-2 rounded-xl font-semibold text-sm bg-indigo-600/80 hover:bg-indigo-600  text-white"
           >
             Simpan
