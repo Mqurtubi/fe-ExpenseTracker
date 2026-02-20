@@ -6,14 +6,18 @@ import BudgetGrid from "../components/list/BudgetGrid";
 import BudgetSummaryCard from "../components/summary/BudgetSummaryCard";
 import useBudget from "../hooks/useBudget";
 import AddModalBudget from "../components/modals/AddModalBudget";
+import useTransactions from "../../transaction/hooks/useTransactions";
+import BudgetEmptyState from "../components/empty/BudgetEmptyState";
 
 export default function BudgetPage() {
   const { month, year, setMonth, setYear, fetchBudget, budget, budgets } =
     useBudget();
-    const [openModal,setOpenModal] = useState(true)
-    const onSuccess=()=>{
-      fetchBudget()
-    }
+  const { refetchTransactions } = useTransactions();
+  const [openModal, setOpenModal] = useState(false);
+  const onSuccess = async () => {
+    await fetchBudget();
+    await refetchTransactions();
+  };
   useEffect(() => {
     fetchBudget();
   }, [fetchBudget]);
@@ -27,9 +31,22 @@ export default function BudgetPage() {
           setYear={setYear}
         />
       </PageHeader>
-      <BudgetSummaryCard budget={budget} addModal={()=>setOpenModal(true)}/>
-      <BudgetGrid budgets={budgets} />
-      <AddModalBudget open={openModal} onClose={()=>setOpenModal(false)} onSuccess={onSuccess}/>
+      {budgets.length === 0 ? (
+        <BudgetEmptyState addModal={() => setOpenModal(true)} />
+      ) : (
+        <>
+          <BudgetSummaryCard
+            budget={budget}
+            addModal={() => setOpenModal(true)}
+          />
+          <BudgetGrid budgets={budgets} />
+        </>
+      )}
+      <AddModalBudget
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        onSuccess={onSuccess}
+      />
     </ContainerContent>
   );
 }
