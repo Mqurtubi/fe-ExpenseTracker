@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { getBudgets } from "../api/api";
+import { deleteBudget, getBudgets } from "../api/api";
 import { ItemBudget, SummaryBudget } from "../types/type";
 
 export default function useBudget() {
@@ -20,5 +20,18 @@ export default function useBudget() {
     }
   }, [month, year]);
 
-  return { month, setMonth, year, setYear, fetchBudget, budget, budgets };
+  const handleDelete = async (id: number) => {
+    await deleteBudget(id);
+    fetchBudget();
+  };
+  return {
+    month,
+    setMonth,
+    year,
+    setYear,
+    fetchBudget,
+    budget,
+    budgets,
+    handleDelete,
+  };
 }

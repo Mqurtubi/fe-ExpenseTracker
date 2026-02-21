@@ -2,15 +2,27 @@ import { ItemBudget } from "../../types/type";
 import CardAction from "../ui/cards/CardAction";
 import CardBudget from "../ui/cards/CardBudget";
 import ProgressBar from "../ui/progress/ProgressBar";
-
-export default function BudgetItem({ budget }: { budget: ItemBudget }) {
+type BudgetItemProps = {
+  budget: ItemBudget;
+  handleUpdate: (v: ItemBudget) => void;
+  handleDelete: (v: number) => void;
+};
+export default function BudgetItem({
+  budget,
+  handleUpdate,
+  handleDelete,
+}: BudgetItemProps) {
   return (
     <CardBudget>
       <div className="space-y-7">
         <div>
           <div className="flex justify-between items-center">
             <p>{budget.category.name}</p>
-            <CardAction />
+            <CardAction
+              handleDelete={handleDelete}
+              handleUpdate={handleUpdate}
+              item={budget}
+            />
           </div>
           <span className="text-xs bg-green-400/30 text-green-700 px-2 py-1 rounded-xl">
             {budget.status}

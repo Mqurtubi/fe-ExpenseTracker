@@ -16,4 +16,11 @@ interface ItemBudget {
   status: "SAFE" | "WARNING" | "OVER";
   used: number;
 }
-export type { SummaryBudget, ItemBudget };
+interface budgetValue {
+  id: string;
+  category_id: number;
+  month: number;
+  year: number;
+  amount: number;
+}
+export type { SummaryBudget, ItemBudget, budgetValue };
