@@ -4,8 +4,9 @@ interface CategoryValue {
   type: TypeCategory;
   icon?: string;
   color?: string;
+  is_default: boolean;
 }
 
 type TypeCategory = "EXPENSE" | "INCOME" | "BOTH";
 
-export type { CategoryValue };
+export type { CategoryValue, TypeCategory };
